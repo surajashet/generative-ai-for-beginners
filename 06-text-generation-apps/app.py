@@ -5,18 +5,16 @@ client = OpenAI(
     api_key="foundry-local"
 )
 
-prompt = """Show me 5 recipes for a dish with the following ingredients:
-chicken, potatoes, and carrots.
-Per recipe, list all the ingredients used"""
+messages = [
+    {"role": "user", "content": "My name is Suraj."},
+    {"role": "assistant", "content": "Nice to meet you, Suraj!"},
+    {"role": "user", "content": "What is my name?"}
+]
+
 
 response = client.chat.completions.create(
     model="qwen2.5-1.5b-instruct-generic-gpu",
-    messages=[
-        {
-            "role": "user",
-            "content": prompt
-        }
-    ]
-)
+   messages=messages 
+)  
 
 print(response.choices[0].message.content)
